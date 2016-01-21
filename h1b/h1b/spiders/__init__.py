@@ -10,6 +10,7 @@ optional_features.remove('boto')
 
 import pandas as pd
 
+from h1b.items import H1BItem
 
 class H1BSpider(scrapy.Spider):
     name = "h1b"
@@ -32,6 +33,19 @@ class H1BSpider(scrapy.Spider):
                                         callback=self.parse2)
 
     def parse2(self, response):
-        filename = ''.join([self.employer, self.job, self.city])
         df = pd.read_html(response.body)[0]
+        filename = ''.join([self.employer, self.job, self.city])
         df.to_csv(filename+'.csv', index=False)
+        for _, row in df.iterrows():
+            visa = row.to_dict()
+            item = H1BItem()
+            item['employer'] = visa['EMPLOYER']
+            item['jobtitle'] = visa['JOB TITLE']
+            item['salary'] = visa['BASE SALARY']
+            city, state = visa['LOCATION'].split(',')
+            item['city'] = city.strip()
+            item['state'] = state.strip()
+            item['status'] = visa['CASE STATUS']
+            item['startdate'] = visa['START DATE']
+            item['submitdate'] = visa['SUBMIT DATE']
+            yield item

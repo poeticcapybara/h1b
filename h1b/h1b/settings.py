@@ -14,7 +14,6 @@ BOT_NAME = 'h1b'
 SPIDER_MODULES = ['h1b.spiders']
 NEWSPIDER_MODULE = 'h1b.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'h1b (+http://www.yourdomain.com)'
 
@@ -61,9 +60,9 @@ NEWSPIDER_MODULE = 'h1b.spiders'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'h1b.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'h1b.pipelines.H1BPipeline': 800,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -83,3 +82,5 @@ NEWSPIDER_MODULE = 'h1b.spiders'
 #HTTPCACHE_DIR='httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES=[]
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# SQLITE_DB = "h1b.db"

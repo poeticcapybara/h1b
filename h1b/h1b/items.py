@@ -10,8 +10,11 @@ import scrapy
 
 class H1BItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     employer = scrapy.Field()
-    title = scrapy.Field()
+    jobtitle = scrapy.Field()
     salary = scrapy.Field()
-    status =  scrapy.Field()
+    city = scrapy.Field()
+    state = scrapy.Field()
+    status = scrapy.Field()
+    startdate = scrapy.Field()
+    submitdate = scrapy.Field()
